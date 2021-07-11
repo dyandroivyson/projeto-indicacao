@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('indicacao', 'IndicacaoController@listar');
 Route::post('indicacao', 'IndicacaoController@cadastrar');
-Route::delete('indicacao/{id}', 'IndicacaoController@excluir');
-Route::put('indicacao/{id}', 'IndicacaoController@alterarStatus');
+Route::delete('indicacao', 'IndicacaoController@excluir');
+Route::put('indicacao', 'IndicacaoController@alterarStatus');

@@ -20,4 +20,9 @@ class Indicacao extends Model
         'email',
         'status_indicacao_id'
     ];
+
+    public function statusIndicacao()
+    {
+        return $this->belongsTo(\App\statusIndicacao::class, 'status_indicacao_id');
+    }
 }

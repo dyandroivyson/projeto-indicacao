@@ -10,10 +10,10 @@ class Utils
     /**
      * Remove caracteres não numericos e retorna uma string numérica
      *
-     * @param string $numero
+     * @param mixed $numero
      * @return string
      */
-    public static function removeMascara(string $numero): string
+    public static function removeMascara($numero)
     {
         if (is_null($numero) || $numero === '') {
             return null;

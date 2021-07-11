@@ -34,9 +34,8 @@ class IndicacaoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->messages(), 
-                'status' => 403
-            ], 200);
+                'msg' => $validator->messages(),
+            ], 403);
         }
 
         $dados['telefone'] = Utils::removeMascara($dados['telefone']);
@@ -58,19 +57,19 @@ class IndicacaoController extends Controller
     public function listar()
     {
         return response()->json(
-            Indicacao::get()
+            Indicacao::with('statusIndicacao')->orderby('nome')->get()
         , 200);
     }
-    
+        
     /**
      * Exclusão de indicação
      *
-     * @param  int $id
+     * @param  mixed $request
      * @return void
      */
-    public function excluir($id)
+    public function excluir(Request $request)
     {
-        $indicacao = Indicacao::find($id);
+        $indicacao = Indicacao::find($request->id);
         if (!$indicacao) {
             return response()->json([
                 'msg' => 'Indicação não encontrada!'
@@ -83,16 +82,16 @@ class IndicacaoController extends Controller
             'msg' => 'Indicação excluída com sucesso!'
         ], 200);
     }
-    
+        
     /**
      * Altera o status da indicação
      *
-     * @param  mixed $id
+     * @param  mixed $request
      * @return void
      */
-    public function alterarStatus($id)
+    public function alterarStatus(Request $request)
     {
-        $indicacao = Indicacao::find($id);
+        $indicacao = Indicacao::find($request->id);
         if (!$indicacao) {
             return response()->json([
                 'msg' => 'Indicação não encontrada!'
